@@ -1,0 +1,27 @@
+springdoc:
+  swagger-ui:
+    path: /
+
+spring:
+  profiles:
+    active: "dev"
+  main:
+    banner-mode: "off"
+
+# Default Config
+server:
+  email: default@mkyong.com
+
+---
+# Dev Config
+spring:
+  profiles: dev
+server:
+  email: dev@mkyong.com
+
+---
+# Prod Config
+spring:
+  profiles: prod
+server:
+  email: prod@mkyong.com
