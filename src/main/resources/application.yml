@@ -10,18 +10,18 @@ spring:
 
 # Default Config
 server:
-  email: default@mkyong.com
+  email: default@gmail.com
 
 ---
 # Dev Config
 spring:
   profiles: dev
 server:
-  email: dev@mkyong.com
+  email: dev@gmail.com
 
 ---
 # Prod Config
 spring:
   profiles: prod
 server:
-  email: prod@mkyong.com
+  email: prod@gmail.com

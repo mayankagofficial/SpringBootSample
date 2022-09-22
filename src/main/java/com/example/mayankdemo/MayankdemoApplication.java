@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
+
+// To remove login page again, and again we had to add exclude for the timebeing
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class MayankdemoApplication implements CommandLineRunner {
 
 	@Autowired
