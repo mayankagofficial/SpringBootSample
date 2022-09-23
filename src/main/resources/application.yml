@@ -2,6 +2,14 @@ springdoc:
   swagger-ui:
     path: /
 
+application:
+  jwt:
+    claim-user-email: userEmail
+    claim-user-scopes: scope
+    token-expiration-after-days: 3
+    token-prefix: Bearer
+    secret-key: secret-key-sample-to-use-secret-key-sample-to-use
+
 spring:
   profiles:
     active: "dev"
