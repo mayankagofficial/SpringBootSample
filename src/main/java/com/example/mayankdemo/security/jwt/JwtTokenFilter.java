@@ -1,6 +1,6 @@
 package com.example.mayankdemo.security.jwt;
 
-//import com.amcrest.unity.accounting.user.UserDetailsServiceImpl;
+import com.example.mayankdemo.user.UserDetailsServiceImpl;
 import com.google.common.net.HttpHeaders;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -25,7 +25,7 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenService jwtTokenService;
-//    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
     private final JwtConfig jwtConfig;
 
     @Override
@@ -38,16 +38,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String jwtToken = authorizationHeader.replace(jwtConfig.getTokenPrefix(), "").trim();
         if(jwtTokenService.verifyJwtToken(jwtToken)){
             String userName = jwtTokenService.getUserNameFromJwtToken(jwtToken);
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
-//            UsernamePasswordAuthenticationToken authentication =
-//                    new UsernamePasswordAuthenticationToken(userDetails,
-//                            null,
-//                            userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails,
+                            null,
+                            userDetails.getAuthorities());
 
-//            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }

@@ -21,8 +21,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Builder
 @AllArgsConstructor
+@Builder
 @Entity
 public class User implements UserDetails {
 
@@ -31,9 +31,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
-
-    private String firstName;
-    private String lastName;
 
     @NotNull
     @NotEmpty
@@ -52,31 +49,12 @@ public class User implements UserDetails {
     @Schema(hidden = true)
     private String tier = Tiers.USER.name();
 
-    //Admin panel can lock/unlock the account and also used in heartbeat api
     @Schema(hidden = true)
     private Boolean isAccountNonLocked = true;
-
-    //After confirming OTP while registration
-    @Schema(hidden = true)
-    private Boolean isEnabled = false;
-
-    //Disable it from cron job after 180 days of last login and also used in heartbeat api
-    @Schema(hidden = true)
-    private Boolean isAccountNonExpired = true;
-
-    //Not used yet
-    @Schema(hidden = true)
-    private Boolean isCredentialsNonExpired = true;
-
-    @Schema(hidden = true)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime joinedDate;
 
     @Schema(hidden = true)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastLoginDate;
-
-    private String country;
 
     @Override
     public boolean equals(Object o) {
@@ -106,24 +84,24 @@ public class User implements UserDetails {
     @Override
     @Schema(hidden = true)
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+        return true;
     }
 
     @Override
     @Schema(hidden = true)
     public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+        return true;
     }
 
     @Override
     @Schema(hidden = true)
     public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+        return true;
     }
 
     @Override
     @Schema(hidden = true)
     public boolean isEnabled() {
-        return isEnabled;
+        return true;
     }
 }

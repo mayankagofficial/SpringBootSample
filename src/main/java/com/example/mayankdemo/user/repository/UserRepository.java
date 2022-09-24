@@ -20,14 +20,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.lastLoginDate = ?2 WHERE u.email = ?1")
     void updateLoginDate(String email, LocalDateTime lastLoginDate);
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.isEnabled = TRUE WHERE u.email = ?1")
-    void enableAppUser(String email);
-
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u SET u.tier = ?2 WHERE u.email = ?1")
-    void updateUserToAdmin(String email, String tier);
 }

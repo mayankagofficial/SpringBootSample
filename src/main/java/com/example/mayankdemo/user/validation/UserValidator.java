@@ -1,8 +1,7 @@
 package com.example.mayankdemo.user.validation;
 
-//import com.amcrest.unity.accounting.user.domain.UserLoginDto;
+import  com.example.mayankdemo.user.domain.UserLoginDto;
 import com.example.mayankdemo.security.config.PasswordEncoder;
-import com.example.mayankdemo.user.Tiers;
 import com.example.mayankdemo.user.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,45 +14,18 @@ public class UserValidator{
 
     PasswordEncoder passwordEncoder;
 
-//    public void validatePassword(UserLoginDto userToVerify, User userStored){
-//        if(!passwordEncoder.bCryptPasswordEncoder()
-//                .matches(userToVerify.getPassword(), userStored.getPassword())){
-//            throw new ResponseStatusException(
-//                    HttpStatus.UNAUTHORIZED, "Invalid credentials."
-//            );
-//        }
-//    }
-
-    public void validateState(User user) {
-        if(!user.getIsAccountNonLocked()){
+    public void validatePassword(UserLoginDto userToVerify, User userStored){
+        if(!passwordEncoder.bCryptPasswordEncoder()
+                .matches(userToVerify.getPassword(), userStored.getPassword())){
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "User account locked."
-            );
-        }
-        if(!user.getIsEnabled()){
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "User account disabled."
-            );
-        }
-        if(!user.getIsAccountNonExpired()){
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "User account expired."
-            );
-        }
-        if(!user.getIsCredentialsNonExpired()){
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "User credentials expired."
+                    HttpStatus.UNAUTHORIZED, "Invalid credentials."
             );
         }
     }
-
     public void validateTier(User user, String tier) {
-        if(tier == null) {
-            tier = Tiers.USER.name();
-        }
         if(!user.getTier().equalsIgnoreCase(tier)) {
             throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED, "User credentials invalid."
+                    HttpStatus.UNAUTHORIZED, "User Tier invalid."
             );
         }
     }

@@ -16,20 +16,44 @@ spring:
   main:
     banner-mode: "off"
 
-# Default Config
-server:
-  email: default@gmail.com
-
 ---
 # Dev Config
 spring:
   profiles: dev
-server:
-  email: dev@gmail.com
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:~/devdb
+    username: username
+    password: password
+    driverClassName: org.h2.Driver
+
+---
+# Test Config
+spring:
+  profiles: test
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:~/testdb
+    username: username
+    password: password
+    driverClassName: org.h2.Driver
 
 ---
 # Prod Config
 spring:
   profiles: prod
-server:
-  email: prod@gmail.com
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:~/proddb
+    username: username
+    password: password
+    driverClassName: org.h2.Driver
