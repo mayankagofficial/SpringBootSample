@@ -50,9 +50,6 @@ public class User implements UserDetails {
     private String tier = Tiers.USER.name();
 
     @Schema(hidden = true)
-    private Boolean isAccountNonLocked = true;
-
-    @Schema(hidden = true)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastLoginDate;
 
